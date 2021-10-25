@@ -21,7 +21,7 @@ public class WebConfig {
         FilterRegistrationBean<Filter> filterRegistration = new FilterRegistrationBean<>();
         filterRegistration.setFilter(new LoginCheckFilter(memberRepository));
         filterRegistration.setOrder(1);
-        filterRegistration.addUrlPatterns("/myInfo");
+        filterRegistration.addUrlPatterns("/api/myInfo");
         return filterRegistration;
     }
 }

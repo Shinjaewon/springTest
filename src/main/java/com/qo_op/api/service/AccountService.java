@@ -71,7 +71,7 @@ public class AccountService {
 
     public boolean authVerification(String authToken, Auth.AuthType authType) {
         Optional<Auth> authOptional = authRepository.findByTokenAndAuthType(authToken, authType);
-        return authOptional.isPresent();
+        return !authOptional.isPresent();
     }
 
     public void changePassword(AccountDto.ChangePasswordReq dto) throws Exception {

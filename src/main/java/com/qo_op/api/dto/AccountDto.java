@@ -68,6 +68,7 @@ public class AccountDto {
 
     }
 
+    @ApiModel(value = "회원 정보")
     @Getter
     public static class MemberRes {
         @ApiModelProperty(value = "이메일")
@@ -90,6 +91,7 @@ public class AccountDto {
         }
     }
 
+    @ApiModel(value = "로그인 결과 정보")
     @Getter
     public static class LoginRes {
         private final String userToken;
@@ -99,6 +101,7 @@ public class AccountDto {
         }
     }
 
+    @ApiModel(value = "로그인 요청 정보")
     @Getter
     public static class LoginReq {
 
@@ -113,9 +116,12 @@ public class AccountDto {
 
     }
 
+    @ApiModel(value = "인증 요청 결과 정보")
     @Getter
     public static class  AuthIssueRes {
+        @ApiModelProperty(value = "인증 식별 아이디")
         private final Long id;
+        @ApiModelProperty(value = "인증 번호")
         private final String authNo;
 
         public AuthIssueRes(Auth auth) {
@@ -124,13 +130,14 @@ public class AccountDto {
         }
     }
 
-
+    @ApiModel(value = "인증 요청 정보")
     @Getter
     public static class AuthIssueReq {
         @ApiModelProperty(value = "핸드폰 번호")
         @NotEmpty
         private String phone;
 
+        @ApiModelProperty(value = "인증타입 (JOIN,FIND_PASSWORD)")
         @Enumerated(EnumType.STRING)
         private Auth.AuthType authType;
 
@@ -138,6 +145,8 @@ public class AccountDto {
             return Auth.builder().authType(authType).phone(phone).build();
         }
     }
+
+    @ApiModel(value = "인증 완료 결과 정보")
     @Getter
     public static class  AuthRes {
         private final String authToken;
@@ -148,6 +157,7 @@ public class AccountDto {
     }
 
 
+    @ApiModel(value = "인증 완료 요청 정보")
     @Getter
     public static class AuthReq {
         @ApiModelProperty(value = "인증 키")
@@ -162,11 +172,13 @@ public class AccountDto {
         @NotEmpty
         private String phone;
 
+        @ApiModelProperty(value = "인증타입 (JOIN,FIND_PASSWORD)")
         @Enumerated(EnumType.STRING)
         private Auth.AuthType authType;
 
     }
 
+    @ApiModel(value = "비밀번호 변경 요청 정보")
     @Getter
     public static class ChangePasswordReq {
         @ApiModelProperty(value = "인증 토큰", required = true)

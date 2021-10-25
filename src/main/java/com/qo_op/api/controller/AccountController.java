@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Api(value = "Account")
+@Api(value="Account")
+@RequestMapping("api")
 @RequiredArgsConstructor
 @RestController
 public class AccountController {
@@ -27,24 +28,24 @@ public class AccountController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = AccountDto.LoginRes.class)
     })
-    @PostMapping(value = "/auth/issue")
+    @PostMapping(value = "auth/issue")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.AuthIssueRes authIssue(@Valid @RequestBody final AccountDto.AuthIssueReq dto) throws Exception {
         return new AccountDto.AuthIssueRes(accountService.authIssue(dto));
     }
 
     @ApiOperation(value = "인증 체크", response = AccountDto.LoginRes.class)
-    @PostMapping(value = "/auth/check")
+    @PostMapping(value = "auth/check")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.AuthRes authCheck(@Valid @RequestBody final AccountDto.AuthReq dto) throws Exception {
         return new AccountDto.AuthRes(accountService.authCheck(dto));
     }
 
-    @ApiOperation(value = "로그인", response = AccountDto.LoginRes.class)
+    @ApiOperation(value = "로그인", notes = "핸드폰, 닉네임, 이메일 정보로 로그인이 가능합니다.",response = AccountDto.LoginRes.class)
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = AccountDto.LoginRes.class)
     })
-    @PostMapping(value = "/signIn")
+    @PostMapping(value = "signIn")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.LoginRes signIn(@Valid @RequestBody final AccountDto.LoginReq dto) throws Exception {
         return new AccountDto.LoginRes(accountService.signIn(dto));
@@ -54,7 +55,7 @@ public class AccountController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = AccountDto.MemberRes.class)
     })
-    @PostMapping(value = "/signUp")
+    @PostMapping(value = "signUp")
     @ResponseStatus(value = HttpStatus.CREATED)
     public AccountDto.MemberRes signUp(@Valid @RequestBody final AccountDto.SignUpReq dto) throws Exception {
         if(accountService.authVerification(dto.getAuthToken(), Auth.AuthType.JOIN)){
@@ -67,7 +68,7 @@ public class AccountController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success", response = AccountDto.MemberRes.class),
     })
-    @GetMapping(value = "/myInfo")
+    @GetMapping(value = "myInfo")
     @ResponseStatus(value = HttpStatus.OK)
     public AccountDto.MemberRes myInfo(@RequestHeader("Authorization") String token) {
 
@@ -78,7 +79,7 @@ public class AccountController {
     @ApiResponses({
             @ApiResponse(code = 200, message = "Success"),
     })
-    @PostMapping(value = "/changePassword")
+    @PostMapping(value = "changePassword")
     @ResponseStatus(value = HttpStatus.OK)
     public void changePassword(@Valid @RequestBody final AccountDto.ChangePasswordReq dto) throws Exception {
 
